@@ -63,7 +63,7 @@ class SequenceInterpreter(object):
                                     num_1 = utilities.getLastValue(temp_array)
                                     num_2 = utilities.peek(res,pr["index"])
                                     if num_2 == OPCODES.SUB:
-                                        num_2 = utilities.execute(0,num_2,utilities.peek(res,pr["index"]+1))
+                                        num_2 = self.execute(0,num_2,utilities.peek(res,pr["index"]+1))
                                         opcode_skip += 1
                                     temp_array.pop()
                                     temp_array.append(self.execute(num_1,opcode,num_2))
@@ -105,10 +105,10 @@ class SequenceInterpreter(object):
         return copy
 
     def run(self,equation,terms=1,step=1):
-        start_time = time.time()
-        
+        print(equation)
         results = []
         i = 1
+
         while i <= terms:
             parsed = parser.parser(equation, evalute=True, term=i)
             values = parser.decomposer(parsed)
@@ -116,15 +116,10 @@ class SequenceInterpreter(object):
             results.append(self.interpret(values))
             i += step
 
-        end_time = time.time()
-    
-        execution_time = end_time - start_time
-        print(f"Execution time: {execution_time:.6f} seconds") 
-
         return results
     
-interpreter = SequenceInterpreter();
+# interpreter = SequenceInterpreter();
 
-res = interpreter.run("n^3", terms= math.pow(10,6))
+# res = interpreter.run("n^3", terms= math.pow(10,6))
 
 # print(res)
