@@ -6,7 +6,7 @@ def getLastValue (array):
     else:
         return None
     
-def parser(string = ""):
+def parser(string = "", evalute = False ,term = 1):
     string = string.replace(" ","");
     string_len = len(string)
     token_array = []
@@ -26,7 +26,11 @@ def parser(string = ""):
                     token_array.append(OPCODES.ADD)
                 elif(token == "n"):
                     token_array.append(OPCODES.ADD)
-                    token_array.append("n")
+                    if(evalute):
+                        token_array.append(term)
+                    else:
+                        token_array.append("n")
+
                 elif(token != "n") and (OPERANDS.__contains__(token) == False):
                     num_str += token
                 else:
@@ -97,7 +101,10 @@ def parser(string = ""):
                         num_str = ""
                     if(OPERANDS.__contains__(string[token_index-1]) == False):
                         token_array.append(OPCODES.MUL)
-                    token_array.append("n")
+                    if(evalute):
+                        token_array.append(term)
+                    else:
+                        token_array.append("n")
 
         token_index += 1
 
@@ -199,6 +206,3 @@ def decomposer(token_array):
         recurse -= 1
 
     return decompose_array
-
-print(decomposer(parser("(n + 1) * 2 - (7(6))")))
-

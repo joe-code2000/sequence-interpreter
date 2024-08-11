@@ -46,5 +46,33 @@ def getPrecidenceOpcode(opcode):
             return({"group":4,"OPCODE":opcode})
     return None
 
+def calcPrecidence(token_array):
+    array = []
+    index = 0
+    for opcode in token_array:
+        match opcode:
+            case OPCODES.EVAL:
+                array.append({"index":index,"group":0,"OPCODE":opcode})
+            case OPCODES.BRKOP:
+                array.append({"index":index,"group":1,"OPCODE":opcode})
+            case OPCODES.BRKOP:
+                array.append({"index":index,"group":1,"OPCODE":opcode})
+            case OPCODES.PWR:
+                array.append({"index":index,"group":2,"OPCODE":opcode})
+            case OPCODES.DIV:
+                array.append({"index":index,"group":3,"OPCODE":opcode})
+            case OPCODES.MUL:
+                array.append({"index":index,"group":3,"OPCODE":opcode})
+            case OPCODES.ADD:
+                array.append({"index":index,"group":4,"OPCODE":opcode})
+            case OPCODES.SUB:
+                array.append({"index":index,"group":4,"OPCODE":opcode})
+        index += 1
+    return array
 
+def getPrecidenceIndex(array,index):
+    for x in array:
+        if x["index"] == index:
+            return x
+    return None
 

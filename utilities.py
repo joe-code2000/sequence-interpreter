@@ -1,3 +1,9 @@
+def peek(array,index):
+    if index+1 != len(array):
+        return array[index+1]
+    else:
+        return None
+
 def getLastValue (array):
     if(len(array) > 0):
         return array[len(array)-1]
