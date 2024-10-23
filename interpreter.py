@@ -55,7 +55,7 @@ class SequenceInterpreter(object):
 
                         match opcode:
                             case OPCODES.EVAL:
-                                execute = self.interpret(stack[utilities.look_forward(res,pr["index"])],recurse=True)
+                                execute = self.interpret(stack[utilities.peek(res,pr["index"])],recurse=True)
                                 temp_array.append(execute)
                                 skip += 1
                             case _:
